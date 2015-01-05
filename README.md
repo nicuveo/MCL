@@ -1,0 +1,4 @@
+MCL
+===
+
+Minimalistic Color Library
