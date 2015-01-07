@@ -1,0 +1,20 @@
+CFLAGS = -std=c++11 -I../../include -I../../src -W -Wall -Wextra -Werror -pedantic -g3 -ggdb3 --coverage
+LDFLAGS += --coverage
+CFIL = test.cc                        \
+       ../../src/cmcl.cc              \
+       ../../src/color.cc             \
+       ../../src/constants.cc         \
+       ../../src/convert.cc           \
+       ../../src/distance.cc          \
+       ../../src/environment.cc       \
+       ../../src/io.cc                \
+       ../../src/misc/trie.cc         \
+       ../../src/spaces/cmy.cc        \
+       ../../src/spaces/cmyk.cc       \
+       ../../src/spaces/hsl.cc        \
+       ../../src/spaces/hsv.cc        \
+       ../../src/spaces/lab.cc        \
+       ../../src/spaces/lch.cc        \
+       ../../src/spaces/rgb.cc        \
+       ../../src/spaces/space_type.cc \
+       ../../src/spaces/xyz.cc        \

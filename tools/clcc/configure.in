@@ -1,0 +1,8 @@
+EXE      = ../../bin/clcc
+LIBS     = ../../bin/libmcl.a
+CFLAGS  += -I../../include
+LDFLAGS := -L../../bin -lboost_program_options -l mcl $(LDFLAGS)
+
+CFIL    =      \
+    options.cc \
+    clcc.cc    \

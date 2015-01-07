@@ -1,0 +1,335 @@
+#!/bin/sh
+
+
+
+######################################################################
+## Vars
+
+base=""
+block=""
+nonbl=""
+verbose="true"
+profile=""
+coptions=""
+loptions=""
+moptions=""
+folders=""
+tocheck=""
+os=`uname -s`
+cc="cc"
+
+
+
+######################################################################
+## Extraction functions
+
+# Prepare file
+getfile()
+{
+    expand "$1" | sed ':a
+/\\$/N
+s/ *\\\n */ /
+ta
+s/#.*$//
+s/^ *//
+/^$/d'
+}
+
+# Get 'system' value
+getsysvalue()
+{
+    getfile "$1" | sed -n "s/^$2: *//p" | tail -n 1
+}
+
+getvalue()
+{
+    gdef=`echo "$block" | sed -n "s/^$1 *= *//p" | tail -n 1`
+    gspe=`echo "$block" | sed -n "s/^$os@$1 *= *//p" | tail -n 1`
+    ndef=`echo "$nonbl" | sed -n "s/^$1 *= *//p" | tail -n 1`
+    nspe=`echo "$nonbl" | sed -n "s/^$os@$1 *= *//p" | tail -n 1`
+
+    if [ -n "$gspe" ] ; then
+	echo "$gspe"
+    else
+	if [ -n "$gdef" ] ; then
+	    echo "$gdef"
+	else
+	    if [ -n "$nspe" ] ; then
+		echo "$nspe"
+	    else
+		echo "$ndef"
+	    fi
+	fi
+    fi
+}
+
+# Get block
+getblock()
+{
+    getfile "$1" | sed -n "/\[$2\]/,/\[.*\]/P"
+}
+
+# Get non-block
+getnonblock()
+{
+    getfile "$1" | sed -n '1,/\[.*\]/p'
+}
+
+
+
+######################################################################
+## Init functions
+
+# Print usage
+usage()
+{
+    echo "usage: configure [options] [profile name]"
+    echo "options:"
+    echo "         -h    : print this help"
+    echo "         -q    : quiet mode"
+    echo "         -o ARG: add ARG at the end of CFLAGS"
+    echo "         -l ARG: add ARG at the beginning of LDFLAGS"
+    echo "         -a ARG: add ARG at the end of Makefile.rules"
+}
+
+# getoptions
+getoptions()
+{
+    while [ $# -ne 0 ] ; do
+	if [ -z "`echo "$1" | sed -n '/^-/P'`" ] ; then
+	    if [ -z "$profile" ] ; then
+		profile="$1"
+	    else
+		usage
+		echo "!!! you can provide only one profile name"
+		exit 1
+	    fi
+	else
+	    case "$1" in
+		"-h")
+		    usage
+		    exit 0;;
+		"-q")
+		    verbose="";;
+		"-o")
+		    if [ $# -eq 1 ] ; then
+			echo "!!! -o option takes an argument"
+			usage
+			exit 3
+		    fi
+		    shift
+		    coptions="$coptions $1";;
+		"-l")
+		    if [ $# -eq 1 ] ; then
+			echo "!!! -l option takes an argument"
+			usage
+			exit 3
+		    fi
+		    shift
+		    loptions="$loptions $1";;
+		"-a")
+		    if [ $# -eq 1 ] ; then
+			echo "!!! -a option takes an argument"
+			usage
+			exit 3
+		    fi
+		    shift
+                    if [ -z "$moptions" ] ; then
+                        moptions="$1"
+                    else
+		        moptions="$options
+$1"
+                    fi;;
+		*)
+		    usage
+		    echo "!!! $1 is not a valid option"
+		    exit 2;;
+	    esac
+	fi
+	shift
+    done
+}
+
+# profile selection and test
+getprofile()
+{
+    if [ -z "$profile" ] ; then
+	profile=`getsysvalue configure.in profile`
+	if [ -n "$verbose" ] ; then
+	    echo "--- using default profile '$profile'"
+	fi
+    else
+	if [ -n "$verbose" ] ; then
+	    echo "--- using profile '$profile'"
+	fi
+    fi
+
+    if [ -z "`getblock configure.in "$profile"`" ] ; then
+	echo "!!! unknown profile '$profile'"
+	exit 4
+    fi
+}
+
+# init script
+init()
+{
+    getoptions "$@"
+    getprofile
+
+    files=""
+    folders=""
+    tocheck=`getsysvalue configure.in sub-dirs`
+    if [ -n "$tocheck" ] ; then
+        files=`find $tocheck -name "configure.in" | tr "\n" " "`
+        folders=`find $tocheck -name "configure.in" | sed 's/configure.in//'`
+    fi
+    block=`getblock configure.in "$profile"`
+    nonbl=`getnonblock configure.in`
+    base="$PWD"
+}
+
+
+
+######################################################################
+## Specific tasks
+
+# File header
+print_header()
+{
+    echo "##"
+    echo "## $1"
+    echo "## generated with configure script"
+    echo "##"
+}
+
+print_os ()
+{
+    echo ""
+    echo ""
+    echo "## OS"
+    echo "OS = $os"
+}
+
+print_prefix ()
+{
+    echo ""
+    echo ""
+    echo "## PREFIX"
+    echo "PREFIX = $1"
+}
+
+print_rule()
+{
+    echo ""
+    echo ""
+    echo "## $1"
+    echo "$nonbl" | sed -n "s/^\($os@\)\{0,1\}$1 *\([:+]\{0,1\}=\) */$1 \2 /p"
+    echo "$block" | sed -n "s/^\($os@\)\{0,1\}$1 *\([:+]\{0,1\}=\) */$1 \2 /p"
+}
+
+# Get compiler
+checkcc()
+{
+    cc=`getvalue "CC"`
+    if [ -z "$cc" ] ; then
+	echo "!!! No compiler specified"
+	exit 5
+    fi
+    if [ ! -x "`which "$cc" 2> /dev/null`" ] ; then
+	echo "!!! $cc is not a valid executable file"
+	exit 6
+    fi
+    if [ -n "$verbose" ] ; then
+	echo "--- using '`which "$cc" 2> /dev/null`' as compiler"
+    fi
+}
+
+# Extract all rules from file
+createrules()
+{
+    for rule in `echo "$block
+$nonbl" | sed -n 's/^ *\([^ ]\{1,\}\@\)\{0,1\}\([^ ]\{1,\}\) *[:+]\{0,1\}=.*$/\2/p'\
+ | sort | uniq` ; do
+      print_rule "$rule" >> Makefile.rules
+    done
+}
+
+# Copy Makefile
+copymakefile()
+{
+    if [ -n "$verbose" ] ; then
+	echo ">>> $1/Makefile.rules" | tr -s '/'
+    fi
+
+    block=`getblock configure.in "$profile"`
+    nonbl=`getnonblock configure.in`
+    createrules
+}
+
+
+
+######################################################################
+## Code
+
+# Main function
+main()
+{
+    checkcc
+
+    if [ -n "$verbose" ] ; then
+        echo ">>> Makefile.rules"
+    fi
+    print_header "Makefile.rules" > Makefile.rules
+    print_os >> Makefile.rules
+    prefix=`getsysvalue configure.in prefix`
+    if [ -n "$prefix" ] ; then
+        print_prefix "$prefix" >> Makefile.rules
+    fi
+    createrules ./
+
+    for folder in $folders ; do
+	cp Makefile.rules "$folder" 2> /dev/null
+	cd "$folder"
+	copymakefile "$folder"
+	cd "$base"
+    done
+
+    if [ -n "$moptions" -o -n "$coptions" -o -n "$loptions" ] ; then
+        echo "" >> Makefile.rules
+        echo "" >> Makefile.rules
+        echo "## command-line options" >> Makefile.rules
+    fi
+    if [ -n "$moptions" ] ; then
+	echo "$moptions" >> Makefile.rules
+    fi
+    if [ -n "$coptions" ] ; then
+	echo "CFLAGS += $coptions" >> Makefile.rules
+    fi
+    if [ -n "$loptions" ] ; then
+	echo "LDFLAGS := $loptions \$(LDFLAGS)" >> Makefile.rules
+    fi
+
+    echo "" >> Makefile.rules
+    echo "" >> Makefile.rules
+    echo "## meta-rules" >> Makefile.rules
+
+    echo    ""                                    >> Makefile.rules
+    echo    "PROFILE = $profile"                  >> Makefile.rules
+    echo    "SUB_DIRS = $tocheck"                 >> Makefile.rules
+    echo    "BUILD_DIR = build/$profile"          >> Makefile.rules
+    echo -n "CONFIGURE_ARGS ="                    >> Makefile.rules
+
+    mkdir -p build/$profile
+
+    for arg in "$@" ; do
+        echo -n " \"$arg\""                       >> Makefile.rules
+    done
+
+    echo    ""                                    >> Makefile.rules
+    echo    ""                                    >> Makefile.rules
+    echo    "Makefile.rules: configure.in $files" >> Makefile.rules
+}
+
+# Calls
+init "$@"
+main "$@"

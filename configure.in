@@ -1,0 +1,57 @@
+## configure.in
+## Made by nicuveo for mcl
+
+
+
+## Configuration
+profile: release
+sub-dirs: check tools
+prefix: /usr/local
+
+
+## Defaults
+CC	  = g++
+CFLAGS	  = -std=c++11 -W -Wall -Wextra -pedantic -I include -I src
+DFLAGS    = -O0 -g3 -ggdb3 -DDEBUG
+RFLAGS    = -O3 -DNDEBUG
+LDFLAGS   =
+TARGETS   = $(LIBA) tools
+
+CFIL =                        \
+     src/cmcl.cc              \
+     src/color.cc             \
+     src/color_map.cc         \
+     src/constants.cc         \
+     src/convert.cc           \
+     src/distance.cc          \
+     src/environment.cc       \
+     src/interpolation.cc     \
+     src/io.cc                \
+     src/misc/trie.cc         \
+     src/spaces/cmy.cc        \
+     src/spaces/cmyk.cc       \
+     src/spaces/hsl.cc        \
+     src/spaces/hsv.cc        \
+     src/spaces/lab.cc        \
+     src/spaces/lch.cc        \
+     src/spaces/rgb.cc        \
+     src/spaces/space_type.cc \
+     src/spaces/xyz.cc        \
+
+
+## Debug
+[debug]
+	CFLAGS  += $(DFLAGS) -pg -DMCL_DEBUG
+	LDFLAGS += -pg
+
+## Check
+[check]
+	CFLAGS  += $(DFLAGS) -Werror
+
+## Profiling
+[profiling]
+	CFLAGS  += -g3 -ggdb3 -O2
+
+## Release
+[release]
+	CFLAGS += $(RFLAGS)

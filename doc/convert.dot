@@ -1,0 +1,29 @@
+graph convert {
+        bgcolor="transparent"
+
+        subgraph print {
+                node [style=filled,fillcolor="aliceblue"]
+                CMYK -- CMY
+        }
+
+        subgraph indep {
+                node [style=filled,fillcolor="darkseagreen1"]
+                XYZ -- LAB -- LCH
+                XYZ -- LCH [style="dotted"]
+        }
+
+        subgraph screen {
+                node [style=filled,fillcolor="lavenderblush1"]
+                RGB -- RGBf -- RGBub -- RGB
+                RGB -- HSL -- HSV -- RGB
+                HSV -- RGBf [style="invis"]
+        }
+
+        RGB  [shape="box"]
+        XYZ  [shape="box"]
+        CMYK [shape="box"]
+
+        XYZ -- CMYK
+        XYZ -- RGB
+        RGB -- CMYK [style="invis"]
+}

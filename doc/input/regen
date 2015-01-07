@@ -1,0 +1,1 @@
+./scripts/src | sed 's%.*%/// \\file &%' > doc/input/doxygen.hh

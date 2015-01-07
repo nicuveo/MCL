@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+set -ue
+
+repos="$1"
+name="$2"
+temp_dir="`mktemp -d`"
+
+svn export -q "$repos" "$temp_dir/$name"
+pushd "$temp_dir" > /dev/null
+tar cjf "$name.tar.bz2" "$name"
+popd  > /dev/null
+cp -f "$temp_dir/$name.tar.bz2" ./
+rm -Rf "$temp_dir"
