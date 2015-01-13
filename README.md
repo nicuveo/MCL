@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nicuveo/MCL.svg?branch=master)](https://travis-ci.org/nicuveo/MCL)
+
 *MCL*: a Minimalistic Color Library
 ===================================
 
