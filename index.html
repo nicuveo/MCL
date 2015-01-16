@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>MCL by nicuveo</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">MCL</h1>
+        <p class="header">Minimalistic Color Library</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/nicuveo/MCL/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/nicuveo/MCL/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/nicuveo/MCL">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/nicuveo">nicuveo</a></p>
+
+
+      </header>
+      <section>
+        <p><a href="https://travis-ci.org/nicuveo/MCL"><img src="https://travis-ci.org/nicuveo/MCL.svg?branch=master" alt="Build Status"></a></p>
+
+<h1>
+<a id="mcl-a-minimalistic-color-library" class="anchor" href="#mcl-a-minimalistic-color-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<em>MCL</em>: a Minimalistic Color Library</h1>
+
+<p>The <em>MCL</em> is a small collection of color related tools. It features:</p>
+
+<ul>
+<li>lightweight color classes (<em>RGB</em>, <em>HSV</em>, <em>XYZ</em>...),</li>
+<li>color spaces conversion algorithms,</li>
+<li>color distance computations (delta e),</li>
+<li>color interpolation functions,</li>
+<li>command line utilities,</li>
+<li>a (limited) C API...</li>
+</ul>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>To build, <em>MCL</em> currently requires g++ 4.8 and boost 1.54.</p>
+
+<div class="highlight highlight-bash"><pre>./configure  <span class="pl-c"># -a "PREFIX=/usr/local"</span>
+make
+make install</pre></div>
+
+<ul>
+<li>Headers will be installed in <code>$PREFIX/include/nauths/mcl/</code>.</li>
+<li>Binaries (<em>clcc</em>, <em>clcd</em>, <em>clct</em>) will be installed in <code>$PREFIX/bin/</code>.</li>
+<li>The .a file (<em>libmcl.a</em>) will be installed in  <code>$PREFIX/lib/</code>.</li>
+</ul>
+
+<p>To use, simply include <code>&lt;nauths/mcl/mcl.hh&gt;</code>, add <code>-std=c++11</code> to your
+compilation flags, and add <code>-l mcl</code> to your link flags.</p>
+
+<h2>
+<a id="library" class="anchor" href="#library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Library</h2>
+
+<p>Here's a file named <code>test.cc</code> that uses and demonstrates some of the mentioned features.</p>
+
+<div class="highlight highlight-c++"><pre>#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>nauths/mcl/mcl.hh<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+
+<span class="pl-k">using</span> <span class="pl-st">namespace</span> <span class="pl-en">mcl</span><span class="pl-k">;</span>
+
+<span class="pl-st">int</span> <span class="pl-en">main</span>(<span class="pl-st">int</span> argc, <span class="pl-st">char</span> <span class="pl-s">const</span>* <span class="pl-s">const</span>* argv)
+{
+  <span class="pl-st">typedef</span> Endomorphism&lt;Color&gt; ColorTransform; <span class="pl-c">// Color -&gt; Color</span>
+
+  ColorTransform t1 = opaque&lt;Color&gt;();        <span class="pl-c">// sets alpha to maximum</span>
+  ColorTransform t2 = grey&lt;Color&gt;();          <span class="pl-c">// converts to grayscale</span>
+  ColorTransform t3 = to&lt;RGBub&gt;();            <span class="pl-c">// converts to unsigned byte RGB</span>
+  ColorTransform tr = (t3 , t2 , t1);         <span class="pl-c">// (,) composes endomorphisms</span>
+
+  <span class="pl-k">for</span> (<span class="pl-st">int</span> i = <span class="pl-c1">1</span>; i &lt; argc; ++i)
+  {
+    Color c = <span class="pl-s3">read</span>&lt;Color&gt;(argv[i]);
+    std::cout &lt;&lt; <span class="pl-s3">tr</span>(c) &lt;&lt; std::endl;          <span class="pl-c">// equivalent to t3(t2(t1(c)))</span>
+  }
+}
+</pre></div>
+
+<p>Simply compile it with <code>g++ -std=c++11 test.cc -lmcl -o test</code>.  This
+program expects colors as arguments, and outputs an opaque, greyscaled,
+<em>RGBified</em> version of them. For instance:</p>
+
+<div class="highlight highlight-bash"><pre>$ ./test red
+RGBub(127,127,127,0)
+
+$ ./test <span class="pl-s1"><span class="pl-pds">"</span>HSV(30, 0.1, 0.6, 0.1)<span class="pl-pds">"</span></span>
+RGBub(146,146,146)</pre></div>
+
+<h2>
+<a id="tools" class="anchor" href="#tools" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tools</h2>
+
+<p>The <em>MCL</em> builds and installs three small binaries: <em>clcc</em>, <em>clcd</em>, and
+<em>clct</em>. Run any of each with "-h" to display a summary of options and
+usage.</p>
+
+<h4>
+<a id="clcc-command-line-color-convert" class="anchor" href="#clcc-command-line-color-convert" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<em>CLCC</em>: Command Line Color Convert</h4>
+
+<div class="highlight highlight-bash"><pre>$ clcc -f <span class="pl-s1"><span class="pl-pds">"</span>red<span class="pl-pds">"</span></span> -t XYZ
+XYZ(41.246,21.267,1.933)</pre></div>
+
+<h4>
+<a id="clcd-command-line-color-distance" class="anchor" href="#clcd-command-line-color-distance" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<em>CLCD</em>: Command Line Color Distance</h4>
+
+<div class="highlight highlight-bash"><pre>clcd --cie94 <span class="pl-s1"><span class="pl-pds">"</span>RGB(1.0, 0.4, 1.0)<span class="pl-pds">"</span></span> <span class="pl-s1"><span class="pl-pds">"</span>RGB(1.0, 0.5, 1.0)<span class="pl-pds">"</span></span>
+4.79934</pre></div>
+
+<h4>
+<a id="clct-command-line-color-transform" class="anchor" href="#clct-command-line-color-transform" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<em>CLCT</em>: Command Line Color Transform</h4>
+
+<div class="highlight highlight-bash"><pre><span class="pl-s3">echo</span> red <span class="pl-k">|</span> clct grey <span class="pl-k">|</span> clct <span class="pl-s1"><span class="pl-pds">"</span>to xyz<span class="pl-pds">"</span></span>
+XYZ(20.214,21.267,23.156)</pre></div>
+
+<h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>All the documentation can be found on the <a href="https://github.com/nicuveo/MCL/wiki">Wiki</a>.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
