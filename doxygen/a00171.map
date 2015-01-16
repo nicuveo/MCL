@@ -1,0 +1,20 @@
+<map id="src/color_map.cc" name="src/color_map.cc">
+<area shape="rect" id="node2" href="$a00025.html" title="nauths/mcl/color_map.hh" alt="" coords="616,80,784,107"/>
+<area shape="rect" id="node4" href="$a00034.html" title="nauths/mcl/interpolation.hh" alt="" coords="680,155,859,181"/>
+<area shape="rect" id="node5" href="$a00023.html" title="nauths/mcl/color.hh" alt="" coords="701,229,836,256"/>
+<area shape="rect" id="node7" href="$a00032.html" title="nauths/mcl/environment.hh" alt="" coords="768,304,947,331"/>
+<area shape="rect" id="node8" href="$a00063.html" title="nauths/mcl/spaces/spaces.hh" alt="" coords="490,379,685,405"/>
+<area shape="rect" id="node25" href="$a00045.html" title="nauths/mcl/profile.hh" alt="" coords="995,379,1137,405"/>
+<area shape="rect" id="node9" href="$a00047.html" title="nauths/mcl/spaces/cmy.hh" alt="" coords="400,453,579,480"/>
+<area shape="rect" id="node18" href="$a00051.html" title="nauths/mcl/spaces/hsl.hh" alt="" coords="5,453,176,480"/>
+<area shape="rect" id="node21" href="$a00053.html" title="nauths/mcl/spaces/hsv.hh" alt="" coords="201,453,375,480"/>
+<area shape="rect" id="node22" href="$a00055.html" title="nauths/mcl/spaces/lab.hh" alt="" coords="603,453,773,480"/>
+<area shape="rect" id="node24" href="$a00057.html" title="nauths/mcl/spaces/lch.hh" alt="" coords="797,453,968,480"/>
+<area shape="rect" id="node10" href="$a00049.html" title="nauths/mcl/spaces/cmyk.hh" alt="" coords="397,528,584,555"/>
+<area shape="rect" id="node11" href="$a00062.html" title="nauths/mcl/spaces/space\l_type.hh" alt="" coords="405,603,576,645"/>
+<area shape="rect" id="node15" href="$a00061.html" title="nauths/mcl/spaces/space\l_macros.hh" alt="" coords="595,694,765,735"/>
+<area shape="rect" id="node16" href="$a00041.html" title="nauths/mcl/misc/math.hh" alt="" coords="790,701,959,728"/>
+<area shape="rect" id="node19" href="$a00059.html" title="nauths/mcl/spaces/rgb.hh" alt="" coords="201,528,372,555"/>
+<area shape="rect" id="node20" href="$a00044.html" title="nauths/mcl/misc/types.hh" alt="" coords="201,611,372,637"/>
+<area shape="rect" id="node23" href="$a00064.html" title="nauths/mcl/spaces/xyz.hh" alt="" coords="702,528,876,555"/>
+</map>
