@@ -18,9 +18,8 @@ Install
 To build, *MCL* currently requires g++ 4.8 and boost 1.54.
 
 ``` bash
-./configure  # -a "PREFIX=/usr/local"
 make
-make install
+make install # PREFIX=/usr/local
 ```
 
 * Headers will be installed in `$PREFIX/include/nauths/mcl/`.
@@ -80,21 +79,21 @@ The *MCL* builds and installs three small binaries: *clcc*, *clcd*, and
 *clct*. Run any of each with "-h" to display a summary of options and
 usage.
 
-#### *CLCC*: Command Line Color Convert
+##### *CLCC*: Command Line Color Convert
 
 ``` bash
 $ clcc -f "red" -t XYZ
 XYZ(41.246,21.267,1.933)
 ```
 
-#### *CLCD*: Command Line Color Distance
+##### *CLCD*: Command Line Color Distance
 
 ``` bash
 clcd --cie94 "RGB(1.0, 0.4, 1.0)" "RGB(1.0, 0.5, 1.0)"
 4.79934
 ```
 
-#### *CLCT*: Command Line Color Transform
+##### *CLCT*: Command Line Color Transform
 
 ``` bash
 echo red | clct grey | clct "to xyz"
