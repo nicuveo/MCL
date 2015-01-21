@@ -95,7 +95,7 @@ namespace mcl
         inline void
         operator()(RGBub& space) const
         {
-          space.alpha() = a_ / 255.0;
+          space.alpha() = a_ * 255.0;
         }
 
       private:
