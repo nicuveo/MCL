@@ -30,9 +30,7 @@
 
       </header>
       <section>
-        <p><a href="https://travis-ci.org/nicuveo/MCL"><img src="https://travis-ci.org/nicuveo/MCL.svg?branch=master" alt="Build Status"></a></p>
-
-<h1>
+        <h1>
 <a id="mcl-a-minimalistic-color-library" class="anchor" href="#mcl-a-minimalistic-color-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <em>MCL</em>: a Minimalistic Color Library</h1>
 
@@ -52,9 +50,8 @@
 
 <p>To build, <em>MCL</em> currently requires g++ 4.8 and boost 1.54.</p>
 
-<div class="highlight highlight-bash"><pre>./configure  <span class="pl-c"># -a "PREFIX=/usr/local"</span>
-make
-make install</pre></div>
+<div class="highlight highlight-bash"><pre>make
+make install <span class="pl-c"># PREFIX=/usr/local</span></pre></div>
 
 <ul>
 <li>Headers will be installed in <code>$PREFIX/include/nauths/mcl/</code>.</li>
@@ -109,23 +106,23 @@ RGBub(146,146,146)</pre></div>
 <em>clct</em>. Run any of each with "-h" to display a summary of options and
 usage.</p>
 
-<h4>
+<h5>
 <a id="clcc-command-line-color-convert" class="anchor" href="#clcc-command-line-color-convert" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<em>CLCC</em>: Command Line Color Convert</h4>
+<em>CLCC</em>: Command Line Color Convert</h5>
 
 <div class="highlight highlight-bash"><pre>$ clcc -f <span class="pl-s1"><span class="pl-pds">"</span>red<span class="pl-pds">"</span></span> -t XYZ
 XYZ(41.246,21.267,1.933)</pre></div>
 
-<h4>
+<h5>
 <a id="clcd-command-line-color-distance" class="anchor" href="#clcd-command-line-color-distance" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<em>CLCD</em>: Command Line Color Distance</h4>
+<em>CLCD</em>: Command Line Color Distance</h5>
 
 <div class="highlight highlight-bash"><pre>clcd --cie94 <span class="pl-s1"><span class="pl-pds">"</span>RGB(1.0, 0.4, 1.0)<span class="pl-pds">"</span></span> <span class="pl-s1"><span class="pl-pds">"</span>RGB(1.0, 0.5, 1.0)<span class="pl-pds">"</span></span>
 4.79934</pre></div>
 
-<h4>
+<h5>
 <a id="clct-command-line-color-transform" class="anchor" href="#clct-command-line-color-transform" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<em>CLCT</em>: Command Line Color Transform</h4>
+<em>CLCT</em>: Command Line Color Transform</h5>
 
 <div class="highlight highlight-bash"><pre><span class="pl-s3">echo</span> red <span class="pl-k">|</span> clct grey <span class="pl-k">|</span> clct <span class="pl-s1"><span class="pl-pds">"</span>to xyz<span class="pl-pds">"</span></span>
 XYZ(20.214,21.267,23.156)</pre></div>
