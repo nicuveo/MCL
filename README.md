@@ -65,7 +65,7 @@ program expects colors as arguments, and outputs an opaque, greyscaled,
 
 ``` bash
 $ ./test red
-RGBub(127,127,127,0)
+RGBub(127,127,127)
 
 $ ./test "HSV(30, 0.1, 0.6, 0.1)"
 RGBub(146,146,146)
