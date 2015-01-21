@@ -89,14 +89,14 @@ XYZ(41.246,21.267,1.933)
 ##### *CLCD*: Command Line Color Distance
 
 ``` bash
-clcd --cie94 "RGB(1.0, 0.4, 1.0)" "RGB(1.0, 0.5, 1.0)"
+$ clcd --cie94 "RGB(1.0, 0.4, 1.0)" "RGB(1.0, 0.5, 1.0)"
 4.79934
 ```
 
 ##### *CLCT*: Command Line Color Transform
 
 ``` bash
-echo red | clct grey | clct "to xyz"
+$ echo red | clct grey | clct "to xyz"
 XYZ(20.214,21.267,23.156)
 ```
 
