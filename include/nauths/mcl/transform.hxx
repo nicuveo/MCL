@@ -97,7 +97,7 @@ namespace mcl
 
   template <typename T>
   inline T
-  rounded(T const& c, double to = MCL_DEFAULT_ROUND)
+  rounded(T const& c, double to)
   {
     return Color::rounded(c, to);
   }

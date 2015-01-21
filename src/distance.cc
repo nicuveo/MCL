@@ -41,7 +41,7 @@ namespace mcl
       return d * D2R;
     }
 
-    inline constexpr double r2d(double d)
+    inline double r2d(double d)
     {
       return il::d_mod(d * R2D);
     }
@@ -51,12 +51,12 @@ namespace mcl
       return x * x;
     }
 
-    inline constexpr double tmp1(double x)
+    inline double tmp1(double x)
     {
       return std::sqrt(std::pow(x, 7.0) / (std::pow(x, 7.0) + 6103515625)); // 25^7
     }
 
-    inline constexpr double tmp2(double x1, double x2)
+    inline double tmp2(double x1, double x2)
     {
       return std::abs(x1 - x2) <= 180.0
         ? (x2 - x1)
@@ -65,7 +65,7 @@ namespace mcl
            : (x2 - x1 - 360.0));
     }
 
-    inline constexpr double tmp3(double x1, double x2)
+    inline double tmp3(double x1, double x2)
     {
       return 0.5 * (x1 + x2 + (std::abs(x2 - x1) <= 180.0
                                ? 0.0
@@ -74,12 +74,12 @@ namespace mcl
                                   : -360.0)));
     }
 
-    inline constexpr double tmp4(double x)
+    inline double tmp4(double x)
     {
       return sqr(x - 50.0) / std::sqrt(20.0 + sqr(x - 50.0));
     }
 
-    inline constexpr double tmp5(double x)
+    inline double tmp5(double x)
     {
       return d2r(60.0 * std::exp(-sqr((x - 275) / 25)));
     }

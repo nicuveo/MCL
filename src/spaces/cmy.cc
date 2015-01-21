@@ -37,7 +37,7 @@ namespace mcl
   }
 
   CMY::CMY(Value c, Value m, Value y, Value a)
-    : Super({c, m, y, a})
+    : Super({{c, m, y, a}})
   {
   }
 

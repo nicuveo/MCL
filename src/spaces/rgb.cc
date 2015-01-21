@@ -43,7 +43,7 @@ namespace mcl
 
     template <typename T>
     RGBBase<T>::RGBBase(Value r, Value g, Value b, Value a)
-      : Super({r, g, b, a})
+      : Super({{r, g, b, a}})
     {
     }
 

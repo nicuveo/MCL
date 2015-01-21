@@ -39,12 +39,12 @@ namespace mcl
       return value == 0.0 ? 0.0 : value;
     }
 
-    inline constexpr double round(double value, double to)
+    inline double round(double value, double to)
     {
       return clean(std::round(value / to) * to);
     }
 
-    inline constexpr double d_mod(double value)
+    inline double d_mod(double value)
     {
       return std::fmod(std::fmod(value, 360.0) + 360.0, 360.0);
     }

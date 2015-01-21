@@ -37,7 +37,7 @@ namespace mcl
   }
 
   HSL::HSL(Value h, Value s, Value l, Value a)
-    : Super({h, s, l, a})
+    : Super({{h, s, l, a}})
   {
   }
 

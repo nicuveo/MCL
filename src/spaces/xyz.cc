@@ -37,7 +37,7 @@ namespace mcl
   }
 
   XYZ::XYZ(Value x, Value y, Value z, Value a)
-    : Super({x, y, z, a})
+    : Super({{x, y, z, a}})
   {
   }
 

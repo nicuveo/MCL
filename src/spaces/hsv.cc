@@ -37,7 +37,7 @@ namespace mcl
   }
 
   HSV::HSV(Value h, Value s, Value v, Value a)
-    : Super({h, s, v, a})
+    : Super({{h, s, v, a}})
   {
   }
 

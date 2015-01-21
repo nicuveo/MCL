@@ -37,7 +37,7 @@ namespace mcl
   }
 
   LAB::LAB(Value l, Value a, Value b, Value alpha)
-    : Super({l, a, b, alpha})
+    : Super({{l, a, b, alpha}})
   {
   }
 

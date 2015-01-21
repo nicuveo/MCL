@@ -37,7 +37,7 @@ namespace mcl
   }
 
   LCH::LCH(Value l, Value c, Value h, Value a)
-    : Super({l, c, h, a})
+    : Super({{l, c, h, a}})
   {
   }
 

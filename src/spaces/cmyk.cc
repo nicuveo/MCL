@@ -37,7 +37,7 @@ namespace mcl
   }
 
   CMYK::CMYK(Value c, Value m, Value y, Value k, Value a)
-    : Super({c, m, y, k, a})
+    : Super({{c, m, y, k, a}})
   {
   }
 
