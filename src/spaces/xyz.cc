@@ -27,7 +27,7 @@ namespace mcl
   // constructors
 
   XYZ::XYZ()
-    : XYZ(100.0, 0.0, 0.0)
+    : XYZ(95.047, 100.000, 108.883)
   {
   }
 

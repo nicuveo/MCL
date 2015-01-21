@@ -25,7 +25,7 @@
 namespace mcl
 {
 
-  /// \brief l: [0..100]; c: [-120..120]; h: [0..360]; a: [0..1] \n
+  /// \brief l: [0..100]; c: [0..120]; h: [0..360]; a: [0..1] \n
   class LCH : public std::array<double, 4>
   {
     public:

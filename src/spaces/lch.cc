@@ -27,7 +27,7 @@ namespace mcl
   // constructors
 
   LCH::LCH()
-    : LCH(100.0, 100.0, 0.0)
+    : LCH(100.0, 0.0, 0.0)
   {
   }
 

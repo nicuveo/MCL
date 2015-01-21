@@ -40,8 +40,8 @@ namespace mcl
   LCH::clamp()
   {
     *this = {
-      il::clamp(l(),    0.0, 100.0),
-      il::clamp(c(), -120.0, 120.0),
+      il::clamp(l(), 0.0, 100.0),
+      il::clamp(c(), 0.0, 120.0),
       il::d_mod(h()),
       il::clamp(a(), 0.0,   1.0)
     };

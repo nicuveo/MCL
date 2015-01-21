@@ -345,7 +345,7 @@ namespace mcl
   {
     return LCH(c.l(),
                std::sqrt(std::pow(c.a(), 2.0) + std::pow(c.b(), 2.0)),
-               r2d(std::atan2(c.b(), c.a())),
+               il::d_mod(r2d(std::atan2(c.b(), c.a()))),
                c.alpha());
   }
 

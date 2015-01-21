@@ -40,10 +40,10 @@ namespace mcl
   XYZ::clamp()
   {
     *this = {
-      il::clamp(x(),    0.0, 100.0),
-      il::clamp(y(), -120.0, 120.0),
-      il::clamp(z(), -120.0, 120.0),
-      il::clamp(a(),    0.0,   1.0)
+      il::clamp(x(), 0.0, 120.0),
+      il::clamp(y(), 0.0, 120.0),
+      il::clamp(z(), 0.0, 120.0),
+      il::clamp(a(), 0.0,   1.0)
     };
   }
 
