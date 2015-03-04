@@ -40,10 +40,10 @@ namespace mcl
   // functions
 
   template <typename T, typename I>
-  T fold(I first, I last);
+  T concat(I first, I last);
 
   template <typename T, typename C>
-  T fold(C const& container);
+  T concat(C const& container);
 
 
 }

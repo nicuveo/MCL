@@ -52,7 +52,7 @@ namespace
       }
     }
 
-    return mcl::fold<Options::Endomorphism>(endos.rbegin(), endos.rend());
+    return mcl::concat<Options::Endomorphism>(endos.rbegin(), endos.rend());
   }
 
 }

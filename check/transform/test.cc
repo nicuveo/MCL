@@ -142,7 +142,7 @@ BOOST_AUTO_TEST_CASE(endos_2)
 
   std::vector<Endo> endos = {alpha75, light75, alpha50, light50};
   Endo e1 = (endos[0], endos[1], endos[2], endos[3]);
-  Endo e2 = mcl::fold<Endo>(endos);
+  Endo e2 = mcl::concat<Endo>(endos);
 
   for (int i = 0; i < 100; ++i)
   {

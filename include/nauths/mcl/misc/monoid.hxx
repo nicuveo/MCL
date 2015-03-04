@@ -31,7 +31,7 @@ namespace mcl
 
   template <typename T, typename I>
   inline T
-  fold(I first, I last)
+  concat(I first, I last)
   {
     return std::accumulate(first,
                            last,
@@ -41,9 +41,9 @@ namespace mcl
 
   template <typename T, typename C>
   inline T
-  fold(C const& c)
+  concat(C const& c)
   {
-    return fold<T>(c.begin(), c.end());
+    return concat<T>(c.begin(), c.end());
   }
 
 
