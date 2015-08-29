@@ -32,8 +32,13 @@
 namespace mcl
 {
 
+  namespace colors
+  {
 
-  BOOST_PP_SEQ_FOR_EACH(MCL_impl, _, MCL_COLOR_NAMES)
 
+    BOOST_PP_SEQ_FOR_EACH(MCL_impl, _, MCL_COLOR_NAMES)
+
+
+  }
 
 }

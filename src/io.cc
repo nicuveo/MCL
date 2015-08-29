@@ -26,40 +26,40 @@
 
 #define MCL_IMPL_enum_show(R, D, S) case spaces::S: return BOOST_PP_STRINGIZE(S);
 
-#define MCL_IMPL_helpers(R, D, S)                                               \
-  SpaceType BOOST_PP_CAT(_RETURN_, S)(std::istream&)   { return spaces::S;    } \
-  Color     BOOST_PP_CAT(_CREATE_, S)(std::istream& x) { return create<S>(x); } \
+#define MCL_IMPL_helpers(R, D, S)                                                 \
+  SpaceType BOOST_PP_CAT(_RETURN_, S)(std::istream&)   { return spaces::S;    }   \
+  Color     BOOST_PP_CAT(_CREATE_, S)(std::istream& x) { return create<S>(x); }   \
 
-#define MCL_IMPL_enum_trie(R, D, S)                                             \
-  SPACE_TYPES.add(BOOST_PP_STRINGIZE(S), BOOST_PP_CAT(_RETURN_, S));            \
-  COLORS.add(     BOOST_PP_STRINGIZE(S), BOOST_PP_CAT(_CREATE_, S));            \
+#define MCL_IMPL_enum_trie(R, D, S)                                               \
+  SPACE_TYPES.add(BOOST_PP_STRINGIZE(S), BOOST_PP_CAT(_RETURN_, S));              \
+  COLORS.add(     BOOST_PP_STRINGIZE(S), BOOST_PP_CAT(_CREATE_, S));              \
 
-#define MCL_IMPL_name_trie(R, D, C)                                             \
-  COLORS.add(BOOST_PP_STRINGIZE(BOOST_PP_TUPLE_ELEM(5, 0, C)),                  \
-             [](std::istream&) { return BOOST_PP_TUPLE_ELEM(5, 1, C); });       \
+#define MCL_IMPL_name_trie(R, D, C)                                               \
+  COLORS.add(BOOST_PP_STRINGIZE(BOOST_PP_TUPLE_ELEM(5, 0, C)),                    \
+             [](std::istream&) { return colors::BOOST_PP_TUPLE_ELEM(5, 1, C); }); \
 
-#define MCL_IMPL_space_show(R, D, S)                                            \
-  void                                                                          \
-  show(std::ostream& ostr, const S& s)                                          \
-  {                                                                             \
-    ostr << s.type() << "(" << static_cast<double>(s[0]);                       \
-    for (int i = 1; i < s.ALPHA; ++i)                                           \
-      ostr << "," << static_cast<double>(s[i]);                                 \
-    if (s.alpha() != Max<S>::alpha)                                             \
-      ostr << "," << static_cast<double>(s.alpha());                            \
-    ostr << ")";                                                                \
-  }                                                                             \
+#define MCL_IMPL_space_show(R, D, S)                                              \
+  void                                                                            \
+  show(std::ostream& ostr, const S& s)                                            \
+  {                                                                               \
+    ostr << s.type() << "(" << static_cast<double>(s[0]);                         \
+    for (int i = 1; i < s.ALPHA; ++i)                                             \
+      ostr << "," << static_cast<double>(s[i]);                                   \
+    if (s.alpha() != Max<S>::alpha)                                               \
+      ostr << "," << static_cast<double>(s.alpha());                              \
+    ostr << ")";                                                                  \
+  }                                                                               \
 
-#define MCL_EXPECT(E)                                                           \
-  if (not (istr >> c) or c != E)                                                \
+#define MCL_EXPECT(E)                                                             \
+  if (not (istr >> c) or c != E)                                                  \
     erroneous_token<T>(E, c)
-#define MCL_EXPECT2(E1, E2)                                                     \
-  if (not (istr >> c) or (c != E1 and c != E2))                                 \
+#define MCL_EXPECT2(E1, E2)                                                       \
+  if (not (istr >> c) or (c != E1 and c != E2))                                   \
     erroneous_token<T>(E1, E2, c)
-#define MCL_EXTRACT(INDEX)                                                      \
-  if (istr >> n)                                                                \
-    res[INDEX] = static_cast<typename T::Value>(n);                             \
-  else                                                                          \
+#define MCL_EXTRACT(INDEX)                                                        \
+  if (istr >> n)                                                                  \
+    res[INDEX] = static_cast<typename T::Value>(n);                               \
+  else                                                                            \
     erroneous_number<T>(INDEX)
 
 
