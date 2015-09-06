@@ -95,20 +95,20 @@ BOOST_AUTO_TEST_CASE(color_map_1)
 {
   mcl::ColorMap m = mcl::ColorMap::strict(mcl::interpolation<mcl::RGBub>());
 
-  m[0.0] = mcl::colors::RED;
-  m[1.0] = mcl::colors::LIME;
+  m[0.0] = mcl::colors::red();
+  m[1.0] = mcl::colors::lime();
 
-  BOOST_CHECK_EQUAL(m.get(0.00), mcl::Color(mcl::colors::RED));
-  BOOST_CHECK_EQUAL(m.get(0.50), mcl::Color(mcl::colors::OLIVE));
-  BOOST_CHECK_EQUAL(m.get(1.00), mcl::Color(mcl::colors::LIME));
+  BOOST_CHECK_EQUAL(m.get(0.00), mcl::Color(mcl::colors::red()));
+  BOOST_CHECK_EQUAL(m.get(0.50), mcl::Color(mcl::colors::olive()));
+  BOOST_CHECK_EQUAL(m.get(1.00), mcl::Color(mcl::colors::lime()));
 }
 
 BOOST_AUTO_TEST_CASE(color_map_2)
 {
   mcl::ColorMap m = mcl::ColorMap::strict(mcl::interpolation<mcl::RGBub>());
 
-  m[0.0] = mcl::colors::RED;
-  m[1.0] = mcl::colors::LIME;
+  m[0.0] = mcl::colors::red();
+  m[1.0] = mcl::colors::lime();
 
   mcl::Color c1 = m.get(0.25);
   mcl::Color c2 = m.compute(0.25);
@@ -124,14 +124,14 @@ BOOST_AUTO_TEST_CASE(color_map_3)
   const auto& i = mcl::interpolation<mcl::RGBub>();
   mcl::ColorMap m = mcl::ColorMap::strict(i);
 
-  m[0.0] = mcl::colors::RED;
-  m[1.0] = mcl::colors::LIME;
+  m[0.0] = mcl::colors::red();
+  m[1.0] = mcl::colors::lime();
 
   mcl::Color c1 = m.get(0.3);
   mcl::Color c2 = m.get(0.7);
 
-  BOOST_REQUIRE_EQUAL(i(mcl::colors::RED, mcl::colors::LIME, 0.3), c1);
-  BOOST_REQUIRE_EQUAL(i(mcl::colors::RED, mcl::colors::LIME, 0.7), c2);
+  BOOST_REQUIRE_EQUAL(i(mcl::colors::red(), mcl::colors::lime(), 0.3), c1);
+  BOOST_REQUIRE_EQUAL(i(mcl::colors::red(), mcl::colors::lime(), 0.7), c2);
 }
 
 BOOST_AUTO_TEST_CASE(color_map_strict)

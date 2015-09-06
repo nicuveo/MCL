@@ -21,7 +21,6 @@ CFIL =                        \
      src/cmcl.cc              \
      src/color.cc             \
      src/color_map.cc         \
-     src/constants.cc         \
      src/convert.cc           \
      src/distance.cc          \
      src/environment.cc       \

@@ -3,7 +3,6 @@ LDFLAGS += --coverage
 CFIL = test.cc                     \
     ../../src/color.cc             \
     ../../src/color_map.cc         \
-    ../../src/constants.cc         \
     ../../src/convert.cc           \
     ../../src/environment.cc       \
     ../../src/interpolation.cc     \

@@ -3,7 +3,6 @@ CFLAGS = -std=c++11 -I../../include -I../../src -W -Wall -Wextra -Werror -pedant
 LDFLAGS += --coverage
 CFIL = test.cc                        \
        ../../src/color.cc             \
-       ../../src/constants.cc         \
        ../../src/convert.cc           \
        ../../src/environment.cc       \
        ../../src/io.cc                \
