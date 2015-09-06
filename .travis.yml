@@ -7,6 +7,7 @@ install:
   - sudo apt-get install    -y -qq cppcheck
   - sudo apt-get install    -y -qq libboost-all-dev
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
+  - wget https://github.com/nicuveo/NPL/archive/master.zip && unzip master.zip && cd NPL-master && sudo make install && cd ..
 
 script: ./configure && make && (cd check && make run analysis) && make flower # :)
 after_failure: cat check/*/*.err
