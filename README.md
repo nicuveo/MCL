@@ -15,7 +15,8 @@ The *MCL* is a small collection of color related tools. It features:
 Install
 -------
 
-To build, *MCL* currently requires g++ 4.8 and boost 1.54.
+To build, *MCL* currently requires g++ 4.8, boost 1.54, and the
+[NPL](https://github.com/nicuveo/NPL).
 
 ``` bash
 make

@@ -14,10 +14,10 @@
 
 #include <cstring>
 #include <boost/lexical_cast.hpp>
+#include <nauths/npl/once.hh>
 #include "nauths/mcl/constants.hh"
 #include "nauths/mcl/io.hh"
 #include "misc/trie.hh"
-#include "misc/once.hh"
 
 
 
