@@ -14,10 +14,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/mcl/mcl.hh>
-
-#define BOOST_TEST_MODULE io
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/mcl/mcl.hh"
 
 
 
@@ -121,6 +119,8 @@ namespace
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(io)
 
 BOOST_AUTO_TEST_CASE(io_00)
 {
@@ -305,3 +305,5 @@ BOOST_AUTO_TEST_CASE(io_08)
 {
   BOOST_PP_SEQ_FOR_EACH(NAME_TEST, _, MCL_COLOR_NAMES);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

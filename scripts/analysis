@@ -1,0 +1,82 @@
+#! /usr/bin/env bash
+
+set -u
+
+
+# shell utils
+
+R=$"\033[1;31m"
+G=$"\033[1;32m"
+Y=$"\033[1;33m"
+B=$"\033[1;34m"
+M=$"\033[1;35m"
+C=$"\033[1;36m"
+N=$"\033[0m"
+
+has()
+{
+    which "$1" > /dev/null 2> /dev/null
+}
+
+run()
+{
+    local name="$1"
+    shift
+    local res=0
+
+    printf "%-${STEP_ALIGN}s" "[$EXE] $name"
+    "$@" >> "$LOG_FILE" 2>&1
+    res=$?
+    test $res -eq 0 && echo -e "[${G}OK${N}]" || echo -e "[${R}KO${N}]"
+
+    return $res
+}
+
+
+# script constants
+
+EXE="analysis"
+LOG_FILE="analysis.log"
+STEP_ALIGN=42
+USAGE="usage: $0 src_dirs"
+
+
+# main
+
+out=""
+opts=""
+
+main()
+{
+    echo cppcheck --enable=all -q "$@"
+    out=$(cppcheck --enable=all -q "$@" 2>&1)
+    echo "$out"
+}
+
+if [ $# -lt 1 ] ; then
+    echo -e "$USAGE"
+    exit 1
+fi
+
+if ! has cppcheck ; then
+    echo "$0: cppcheck not in path, aborting"
+    exit 0
+fi
+
+date > "$LOG_FILE"
+run "source analysis" main "$@"
+lines=$(    echo "$out"                    | wc -l )
+errors=$(   echo "$out" | grep "(error)"   | wc -l )
+warnings=$( echo "$out" | grep "(warning)" | wc -l )
+misc=$(( $lines - $errors - $warnings ))
+
+run "    warnings: `printf '%5u' $warnings`" test $warnings -eq 0
+echo "$out" | grep "(warning)"
+run "    errors:   `printf '%5u' $errors`"   test $errors   -eq 0
+echo "$out" | grep "(error)"
+
+if test $misc -ne 0 ; then
+    echo -e "[$EXE]     misc:     $Y`printf '%5s' $misc`$N"
+fi
+
+test $warnings -eq 0 -a $errors -eq 0

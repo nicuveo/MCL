@@ -14,14 +14,13 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/mcl/mcl.hh>
+#include <boost/test/unit_test.hpp>
+#include "nauths/mcl/mcl.hh"
 
 extern "C" {
-#include <nauths/mcl/cmcl.h>
+#include "nauths/mcl/cmcl.h"
 }
 
-#define BOOST_TEST_MODULE cmcl
-#include <boost/test/included/unit_test.hpp>
 
 
 
@@ -74,6 +73,8 @@ namespace
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(cmcl)
 
 BOOST_AUTO_TEST_CASE(cmcl_cmy_to_cmyk) { CMCL_TEST(CMY , CMYK, mcl_cmy_to_cmyk); }
 BOOST_AUTO_TEST_CASE(cmcl_cmy_to_hsl ) { CMCL_TEST(CMY , HSL , mcl_cmy_to_hsl ); }
@@ -155,3 +156,5 @@ BOOST_AUTO_TEST_CASE(cmcl_cie_2000)
   mcl::LAB l2 = make<mcl::LAB>();
   BOOST_REQUIRE_EQUAL(mcl_cie_2000(l1.begin(), l2.begin()), mcl::cie_2000(l1, l2));
 }
+
+BOOST_AUTO_TEST_SUITE_END()

@@ -1,0 +1,94 @@
+#! /usr/bin/env bash
+
+set -u
+
+
+# shell utils
+
+R=$"\033[1;31m"
+G=$"\033[1;32m"
+Y=$"\033[1;33m"
+B=$"\033[1;34m"
+M=$"\033[1;35m"
+C=$"\033[1;36m"
+N=$"\033[0m"
+
+has()
+{
+    which "$1" > /dev/null 2> /dev/null
+}
+
+run()
+{
+    local name="$1"
+    shift
+    local res=0
+
+    printf "%-${STEP_ALIGN}s" "[$EXE] $name"
+    "$@" >> "$LOG_FILE" 2>&1
+    res=$?
+    test $res -eq 0 && echo -e "[${G}OK${N}]" || echo -e "[${R}KO${N}]"
+
+    return $res
+}
+
+
+# script constants
+
+EXE="coverage"
+LOG_FILE="coverage.log"
+COV_OUT="coverage.info"
+STEP_ALIGN=42
+USAGE="usage: coverage tests_dir out_dir src_dirs..."
+
+
+# main
+
+geninfo()
+{
+    echo lcov -d "$tests_dir" -c -o "$COV_OUT"
+         lcov -d "$tests_dir" -c -o "$COV_OUT" 2>&1
+}
+
+filterinfo()
+{
+    echo lcov -o "$COV_OUT" -e "$COV_OUT" "${src_dirs[@]}"
+         lcov -o "$COV_OUT" -e "$COV_OUT" "${src_dirs[@]}" 2>&1
+}
+
+report()
+{
+    echo genhtml -q --demangle-cpp --legend -s -o "$out_dir" "$COV_OUT"
+         genhtml -q --demangle-cpp --legend -s -o "$out_dir" "$COV_OUT" 2>&1
+}
+
+clean()
+{
+    echo lcov -d "$tests_dir" -z
+         lcov -d "$tests_dir" -z 2>&1
+}
+
+if [ $# -lt 3 ] ; then
+    echo -e "$USAGE"
+    exit 1
+fi
+
+if ! has lcov || ! has genhtml ; then
+    echo "$0: lcov or genhtml not in path, aborting"
+    exit 0
+fi
+
+tests_dir="$1"
+out_dir="$2"
+shift 2
+
+src_dirs=()
+for src in "$@" ; do
+    src_dirs+=( "${src%/}/*" )
+done
+
+date > "$LOG_FILE"
+run "extracting"      geninfo    || exit $?
+run "filtering"       filterinfo || exit $?
+run "creating report" report     || exit $?
+run "cleaning"        clean      || exit $?

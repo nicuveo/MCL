@@ -14,15 +14,15 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/mcl/mcl.hh>
-
-#define BOOST_TEST_MODULE distance
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/mcl/mcl.hh"
 
 
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(distance)
 
 BOOST_AUTO_TEST_CASE(distance_1976)
 {
@@ -80,3 +80,5 @@ BOOST_AUTO_TEST_CASE(distance_2000)
   BOOST_CHECK_CLOSE(mcl::cie_2000(mcl::colors::cyan(),    mcl::colors::magenta()),  57.983482, 0.001);
   BOOST_CHECK_CLOSE(mcl::cie_2000(mcl::colors::blue(),    mcl::colors::magenta()),  32.421232, 0.001);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

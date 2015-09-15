@@ -1,3 +1,0 @@
-CFIL = test.cc
-CFLAGS = -std=c++11 -I../../include -I../../src -W -Wall -Wextra -Werror -pedantic -g3 -ggdb3 --coverage
-LDFLAGS += --coverage

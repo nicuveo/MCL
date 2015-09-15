@@ -14,15 +14,15 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/mcl/mcl.hh>
-
-#define BOOST_TEST_MODULE size
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/mcl/mcl.hh"
 
 
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(size)
 
 BOOST_AUTO_TEST_CASE(size_00)
 {
@@ -39,3 +39,5 @@ BOOST_AUTO_TEST_CASE(size_00)
   BOOST_CHECK_EQUAL(sizeof(mcl::CMY),   4 * sizeof(double));
   BOOST_CHECK_EQUAL(sizeof(mcl::CMYK),  5 * sizeof(double));
 }
+
+BOOST_AUTO_TEST_SUITE_END()

@@ -14,10 +14,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/mcl/mcl.hh>
-
-#define BOOST_TEST_MODULE transform
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/mcl/mcl.hh"
 
 
 
@@ -110,6 +108,8 @@ namespace
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
 
+BOOST_AUTO_TEST_SUITE(transform)
+
 BOOST_AUTO_TEST_CASE(gray_equal_grey)
 {
   srand(42);
@@ -152,3 +152,5 @@ BOOST_AUTO_TEST_CASE(endos_2)
     BOOST_REQUIRE_EQUAL(c1, c2);
   }
 }
+
+BOOST_AUTO_TEST_SUITE_END()

@@ -14,10 +14,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/mcl/mcl.hh>
-
-#define BOOST_TEST_MODULE symmetry
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/mcl/mcl.hh"
 
 
 
@@ -92,6 +90,8 @@ namespace
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
 
+BOOST_AUTO_TEST_SUITE(symmetry)
+
 BOOST_AUTO_TEST_CASE(symmetry_00)
 {
   init();
@@ -131,3 +131,5 @@ BOOST_AUTO_TEST_CASE(symmetry_01)
     }
   }
 }
+
+BOOST_AUTO_TEST_SUITE_END()

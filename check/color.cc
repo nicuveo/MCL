@@ -14,10 +14,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/mcl/mcl.hh>
-
-#define BOOST_TEST_MODULE color
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/mcl/mcl.hh"
 
 
 
@@ -89,6 +87,8 @@ namespace
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(color)
 
 BOOST_AUTO_TEST_CASE(color_00)
 {
@@ -263,3 +263,5 @@ BOOST_AUTO_TEST_CASE(clamp_xyz)
     BOOST_REQUIRE(c.z() >=    0.0 and c.z() <= 120.0);
   }
 }
+
+BOOST_AUTO_TEST_SUITE_END()

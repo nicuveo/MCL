@@ -14,10 +14,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/mcl/mcl.hh>
-
-#define BOOST_TEST_MODULE color_map
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/mcl/mcl.hh"
 
 
 
@@ -90,6 +88,8 @@ namespace
 
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
+
+BOOST_AUTO_TEST_SUITE(color_map)
 
 BOOST_AUTO_TEST_CASE(color_map_1)
 {
@@ -199,3 +199,5 @@ BOOST_AUTO_TEST_CASE(interpolation_bonus)
     BOOST_CHECK_EQUAL(mcl::interpolate(s, c1, c2, 1.0), c2);
   }
 }
+
+BOOST_AUTO_TEST_SUITE_END()

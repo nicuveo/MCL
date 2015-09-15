@@ -14,10 +14,8 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <nauths/mcl/mcl.hh>
-
-#define BOOST_TEST_MODULE convert
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+#include "nauths/mcl/mcl.hh"
 
 
 
@@ -99,6 +97,8 @@ namespace
 //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 // Implementation
 
+BOOST_AUTO_TEST_SUITE(convert)
+
 BOOST_AUTO_TEST_CASE(convert_00)
 {
   for (const auto& d : DATA)
@@ -118,3 +118,5 @@ BOOST_AUTO_TEST_CASE(convert_00)
       }
     }
 }
+
+BOOST_AUTO_TEST_SUITE_END()
