@@ -45,6 +45,8 @@ target_link_libraries(clcc mcl boost_program_options)
 target_link_libraries(clcd mcl boost_program_options)
 target_link_libraries(clct mcl boost_program_options)
 
+add_custom_target(tools DEPENDS clcc clcd clct)
+
 
 
 # tests
