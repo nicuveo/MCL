@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 2.8.12)
 # compil
 
 set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pedantic")
-set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -O0 -pg -g3 -ggdb3 -DDEBUG -coverage")
+set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -O0 -pg -g3 -ggdb3 -DDEBUG --coverage")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Werror -O3 -DNDEBUG")
 
 include_directories(include src)
