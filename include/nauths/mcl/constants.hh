@@ -167,22 +167,22 @@
 
 # define MCL_decl(R, D, C)                               \
   template <typename T>                                  \
-  inline T BOOST_PP_TUPLE_ELEM(5, 0, C)()                \
+  inline T BOOST_PP_TUPLE_ELEM(4, 0, C)()                \
   {                                                      \
-    return to<T>(BOOST_PP_TUPLE_ELEM(5, 0, C)<RGBub>()); \
+    return to<T>(BOOST_PP_TUPLE_ELEM(4, 0, C)<RGBub>()); \
   }                                                      \
                                                          \
   template <>                                            \
-  inline RGBub BOOST_PP_TUPLE_ELEM(5, 0, C)()            \
+  inline RGBub BOOST_PP_TUPLE_ELEM(4, 0, C)()            \
   {                                                      \
-    return RGBub(BOOST_PP_TUPLE_ELEM(5, 1, C),           \
-                 BOOST_PP_TUPLE_ELEM(5, 2, C),           \
-                 BOOST_PP_TUPLE_ELEM(5, 3, C));          \
+    return RGBub(BOOST_PP_TUPLE_ELEM(4, 1, C),           \
+                 BOOST_PP_TUPLE_ELEM(4, 2, C),           \
+                 BOOST_PP_TUPLE_ELEM(4, 3, C));          \
   }                                                      \
                                                          \
-  inline RGBub BOOST_PP_TUPLE_ELEM(5, 0, C)()            \
+  inline RGBub BOOST_PP_TUPLE_ELEM(4, 0, C)()            \
   {                                                      \
-    return BOOST_PP_TUPLE_ELEM(5, 0, C)<RGBub>();        \
+    return BOOST_PP_TUPLE_ELEM(4, 0, C)<RGBub>();        \
   }                                                      \
 
 

@@ -48,8 +48,8 @@ namespace
   }                                                                  \
 
 #define NAME_TEST(R, D, C)                                           \
-  NAME_TEST_(BOOST_PP_STRINGIZE(BOOST_PP_TUPLE_ELEM(5, 0, C)),       \
-             mcl::colors::BOOST_PP_TUPLE_ELEM(5, 0, C)())
+  NAME_TEST_(BOOST_PP_STRINGIZE(BOOST_PP_TUPLE_ELEM(4, 0, C)),       \
+             mcl::colors::BOOST_PP_TUPLE_ELEM(4, 0, C)())
 #define NAME_TEST_(N, C)                                             \
   check(C,           mcl::read<mcl::Color>(N));                      \
   check(C.rounded(), mcl::read<mcl::Color>(mcl::show(C)).rounded()); \

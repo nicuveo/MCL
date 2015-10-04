@@ -35,7 +35,7 @@
   COLORS.add(     BOOST_PP_STRINGIZE(S), BOOST_PP_CAT(_CREATE_, S));            \
 
 #define MCL_IMPL_name_trie(R, D, C)                                             \
-  MCL_IMPL_name_trie_(BOOST_PP_TUPLE_ELEM(5, 0, C))
+  MCL_IMPL_name_trie_(BOOST_PP_TUPLE_ELEM(4, 0, C))
 
 #define MCL_IMPL_name_trie_(C)                                                  \
   COLORS.add(BOOST_PP_STRINGIZE(C),                                             \
