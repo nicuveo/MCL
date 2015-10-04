@@ -58,7 +58,11 @@ namespace mcl
   ColorMap::compute(Key k)
   {
     auto it = find(k);
-    return it != end() ? it->second : ((*this)[k] = get(k));
+    if (it != end())
+      return it->second;
+    auto c = get(k);
+    (*this)[k] = c;
+    return c;
   }
 
 
