@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/nicuveo/MCL.svg?branch=master)](https://travis-ci.org/nicuveo/MCL)
 [![Coverage Status](https://coveralls.io/repos/nicuveo/MCL/badge.svg?branch=master&service=github)](https://coveralls.io/github/nicuveo/MCL?branch=master)
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/6560/badge.svg)](https://scan.coverity.com/projects/nicuveo-mcl)
 
 *MCL*: a Minimalistic Color Library
 ===================================
