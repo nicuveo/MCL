@@ -58,8 +58,12 @@ filterinfo()
 
 report()
 {
-    echo genhtml -q --demangle-cpp --legend -s -o "$out_dir" "$COV_OUT"
-         genhtml -q --demangle-cpp --legend -s -o "$out_dir" "$COV_OUT" 2>&1
+    if ! has genhtml ; then
+        echo "$0: genhtml not in path, skipping report generation"
+    else
+        echo genhtml -q --demangle-cpp --legend -s -o "$out_dir" "$COV_OUT"
+             genhtml -q --demangle-cpp --legend -s -o "$out_dir" "$COV_OUT" 2>&1
+    fi
 }
 
 clean()
@@ -73,8 +77,8 @@ if [ $# -lt 3 ] ; then
     exit 1
 fi
 
-if ! has lcov || ! has genhtml ; then
-    echo "$0: lcov or genhtml not in path, aborting"
+if ! has lcov ; then
+    echo "$0: lcov not in path, aborting"
     exit 0
 fi
 
