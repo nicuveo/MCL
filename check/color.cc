@@ -66,7 +66,7 @@ namespace
   template <typename T, std::size_t N>
   void fill(std::array<T, N>& color, double alpha, double factor = 1.0)
   {
-    for (int i = 0; i < N - 1; ++i)
+    for (std::size_t i = 0; i < N - 1; ++i)
       color[i] = random<T>() * factor;
     color[N - 1] = normalize<T>(alpha);
   }

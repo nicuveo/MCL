@@ -55,7 +55,7 @@ namespace
   template <typename T, std::size_t N>
   void fill(std::array<T, N>& color)
   {
-    for (int i = 0; i < N; ++i)
+    for (std::size_t i = 0; i < N; ++i)
       color[i] = random<T>();
   }
 

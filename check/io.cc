@@ -80,7 +80,7 @@ namespace
   template <typename T, std::size_t N>
   void fill(std::array<T, N>& color, bool alpha)
   {
-    for (int i = 0; i < (alpha ? N : N - 1); ++i)
+    for (std::size_t i = 0; i < (alpha ? N : N - 1); ++i)
       color[i] = random<T>();
   }
 
